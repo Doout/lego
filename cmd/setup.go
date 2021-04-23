@@ -4,6 +4,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
+	"github.com/go-acme/lego/v4/zerossl"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -37,6 +38,16 @@ func setup(ctx *cli.Context, accountsStorage *AccountsStorage) (*Account, *lego.
 func newClient(ctx *cli.Context, acc registration.User, keyType certcrypto.KeyType) *lego.Client {
 	config := lego.NewConfig(acc)
 	config.CADirURL = ctx.GlobalString("server")
+	if ctx.GlobalIsSet("zero-ssl") {
+		config.CADirURL = lego.ZeroSSLLEDirectoryProduction
+		ebs, err := zerossl.RetrieveEBS(ctx.GlobalString("zero-ssl"))
+		if err != nil {
+			log.Fatal(err)
+		}
+		ctx.GlobalSet("eab", "true")
+		ctx.GlobalSet("kid", ebs.Kid)
+		ctx.GlobalSet("hmac", ebs.HmacKey)
+	}
 
 	config.Certificate = lego.CertificateConfig{
 		KeyType: keyType,

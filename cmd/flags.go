@@ -28,6 +28,10 @@ func CreateFlags(defaultPath string) []cli.Flag {
 			Name:  "csr, c",
 			Usage: "Certificate signing request filename, if an external CSR is to be used.",
 		},
+		cli.StringFlag{
+			Name:  "zero-ssl",
+			Usage: "ZeroSSL API Key",
+		},
 		cli.BoolFlag{
 			Name:  "eab",
 			Usage: "Use External Account Binding for account registration. Requires --kid and --hmac.",

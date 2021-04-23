@@ -30,6 +30,9 @@ const (
 	// LEDirectoryProduction URL to the Let's Encrypt production.
 	LEDirectoryProduction = "https://acme-v02.api.letsencrypt.org/directory"
 
+	// ZeroSSLLEDirectoryProduction URL to the ZeroSSL production 90 days.
+	ZeroSSLLEDirectoryProduction = "https://acme.zerossl.com/v2/DV90"
+
 	// LEDirectoryStaging URL to the Let's Encrypt staging.
 	LEDirectoryStaging = "https://acme-staging-v02.api.letsencrypt.org/directory"
 )
